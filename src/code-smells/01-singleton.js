@@ -1,0 +1,32 @@
+/**
+ *  Tratar de Evitar este patrón singleton, razones:
+ *  - son difíciles de testear.
+ *  - no se puede rastrear de dónde vienen los cambios. 
+ */
+const Singleton = (function () {
+    
+    let instance;
+
+    function createInstance() {
+        return new Object('I am the instance');
+    }
+
+    return {
+        getInstance() {
+            if (!instance) {
+                instance = createInstance();
+            }
+            return instance;
+        }
+    };
+})();
+
+function main() {
+
+    const instance1 = Singleton.getInstance();
+    const instance2 = Singleton.getInstance();
+
+    console.log('Misma instancia? ', (instance1 === instance2));
+}
+
+main();
